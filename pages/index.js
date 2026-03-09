@@ -16,7 +16,7 @@ export default function Home() {
       className={`${geistSans.className} ${geistMono.className}min-h-screen text-center font-sans dark:bg-black`}
     >
       <h1 className="text-4xl font-semibold">Sneaker Shop</h1>
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start"></main>
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start"></main>
     </div>
   );
 }
