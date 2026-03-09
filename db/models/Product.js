@@ -13,7 +13,7 @@ const ProductSchema = new Schema(
     images: [String],
   },
   {
-    timeseries: true,
+    timestamps: true,
   },
 );
 
