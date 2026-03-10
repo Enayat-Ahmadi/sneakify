@@ -5,8 +5,6 @@ import { useRouter } from "next/router";
 const navItems = [
   { label: "Home", href: "/" },
   //   { label: "Products", href: "/products" },
-  //   { label: "Men", href: "/men" },
-  //   { label: "Women", href: "/women" },
 ];
 export default function Navbar() {
   const router = useRouter();
