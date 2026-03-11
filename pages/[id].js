@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import ProductDetails from "@/components/ProductCard/ProductDetails";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -14,11 +15,10 @@ const Details = () => {
   } = useSWR(id ? `/api/products/${id}` : null, fetcher);
   if (error) return <p>error</p>;
   if (isLoading) return <p>isLoading...</p>;
-  console.log(product);
+
   return (
-    <div className="h-screen w-full flex flex-col gap-10 items-center ">
-      <h1>this is Details page</h1>
-      <h3>product id: {id}</h3>
+    <div className="h-screen p-5">
+      <ProductDetails product={product} />
     </div>
   );
 };
