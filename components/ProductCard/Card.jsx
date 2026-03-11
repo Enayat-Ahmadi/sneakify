@@ -1,31 +1,42 @@
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-const Card = ({ product }) => {
+export default function ProductCard({ product }) {
   return (
-    <div className="group rounded-2xl border bg-white overflow-hidden shadow-sm hover:shadow-md transition">
-      <div className="relative  h-64 overflow-hidden bg-gray-100">
-        <div className="absolute top-3 left-3 z-10 bg-black text-white text-xs px-2 py-1 rounded-full">
-          New
-        </div>
+    <Card className="relative mx-auto w-full max-w-sm pt-0">
+      <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
 
-        <Image
-          src={product.images[0]}
-          alt={product.name}
-          fill
-          className="object-cover h-200 w-200 transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-
-      <div className="p-4">
-        <p className="text-sm text-gray-500">{product.brand}</p>
-        <h3 className="font-semibold text-lg">{product.name}</h3>
-        <p className="mt-2 text-base font-bold">${product.price}</p>
-
-        <button className="mt-4 w-full rounded-xl bg-black text-white py-2 font-medium hover:opacity-90 transition">
+      <Image
+        src={product.images?.[0]}
+        alt={product.name}
+        width={800}
+        height={450}
+        className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+      />
+      <CardHeader>
+        <CardAction>
+          <Badge variant="secondary">{product.brand}</Badge>
+        </CardAction>
+        <CardTitle>{product.name}</CardTitle>
+        <CardDescription>{product.price} $</CardDescription>
+      </CardHeader>
+      <CardFooter className="flex flex-col gap-2">
+        <Button className="w-full" size="lg">
+          Add to Wishlist
+        </Button>
+        <Button className="w-full" size="lg">
           Add to Cart
-        </button>
-      </div>
-    </div>
+        </Button>
+      </CardFooter>
+    </Card>
   );
-};
-export default Card;
+}
