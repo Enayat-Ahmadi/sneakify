@@ -1,4 +1,5 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
+import { Quattrocento } from "next/font/google";
 
 export default function useCart() {
   const [productCart, setProductCart] = useLocalStorage("cart", []);
@@ -29,8 +30,22 @@ export default function useCart() {
       ),
     );
   }
+  function decreaseQuantity(productId) {
+    setProductCart(
+      productCart
+        .map((item) =>
+          item.productId === productId
+            ? { ...item, quantity: quantity - 1 }
+            : item,
+        )
+        .filter((item) => item.quantity > 0),
+    );
+  }
   return {
     productCart,
     addToCart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
   };
 }
