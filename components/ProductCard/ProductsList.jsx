@@ -1,7 +1,7 @@
 import ProductCard from "./Card";
 import Link from "next/link";
 
-const ProductsList = ({ products }) => {
+export default function ProductsList({ products }) {
   return (
     <ul className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
       {products?.map((product) => {
@@ -15,6 +15,4 @@ const ProductsList = ({ products }) => {
       })}
     </ul>
   );
-};
-
-export default ProductsList;
+}

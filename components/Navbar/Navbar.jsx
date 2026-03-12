@@ -1,16 +1,15 @@
 import Link from "next/link";
 import { ShoppingCart, Heart } from "lucide-react";
 import { useRouter } from "next/router";
-import { useLocalStorage } from "@uidotdev/usehooks";
-
+import useWishlist from "@/hooks/useWishlist";
 
 const navItems = [
   { label: "Home", href: "/" },
   //   { label: "Products", href: "/products" },
 ];
 export default function Navbar() {
-  const [Wishlist] = useLocalStorage("wishlist", []);
-  const wishlistedProducts = Wishlist.length;
+  const { wishlist } = useWishlist();
+
   const router = useRouter();
   return (
     <nav className="flex items-center justify-between px-6 py-4 border-b">
@@ -42,7 +41,7 @@ export default function Navbar() {
           <Link href="/wishlist">
             <Heart className="w-9 h-9" />
             <span className="absolute bg-amber-500 rounded-full h-5 w-5 text-center text-white top-4 right-0">
-              {wishlistedProducts}
+              {wishlist.length}
             </span>
           </Link>
         </div>

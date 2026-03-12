@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import useWishlist from "@/hooks/useWishlist";
 
-export function ProductDetails({ product }) {
+export default function ProductDetails({ product }) {
   const { toggleWishlist, isWishlisted } = useWishlist();
   return (
     <Card className="mx-auto max-w-5xl overflow-hidden">
@@ -63,4 +63,3 @@ export function ProductDetails({ product }) {
   );
 }
 
-export default ProductDetails;

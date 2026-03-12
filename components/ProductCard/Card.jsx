@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 
 export default function ProductCard({ product }) {
-  const {setWishlist,toggleWishlist, isWishlisted } = useWishlist();
+  const { toggleWishlist, isWishlisted } = useWishlist();
 
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
