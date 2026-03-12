@@ -20,6 +20,15 @@ export default function useCart() {
   function removeFromCart(productId) {
     setProductCart(productCart.filter((item) => item.productId !== productId));
   }
+  function increaseQuantity(productId) {
+    setProductCart(
+      productCart.map((item) =>
+        item.productId === productId
+          ? { ...item, quantity: quantity + 1 }
+          : item,
+      ),
+    );
+  }
   return {
     productCart,
     addToCart,
