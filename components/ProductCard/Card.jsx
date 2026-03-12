@@ -20,6 +20,7 @@ export default function ProductCard({ product }) {
       setWishlist([...wishlist, productId]);
     }
   }
+  const isWishlsited = wishlist.includes(product._id);
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <Image
@@ -45,7 +46,7 @@ export default function ProductCard({ product }) {
             toggleWishlist(product._id);
           }}
         >
-          Add to Wishlist
+          {isWishlsited ? "remove from wishlist" : "Add to Wishlist"}
         </Button>
         <Button
           className="w-full"
