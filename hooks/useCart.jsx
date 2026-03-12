@@ -1,5 +1,5 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
-import { Quattrocento } from "next/font/google";
+
 
 export default function useCart() {
   const [productCart, setProductCart] = useLocalStorage("cart", []);
