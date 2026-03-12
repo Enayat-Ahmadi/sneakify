@@ -17,6 +17,9 @@ export default function useCart() {
       setProductCart([...productCart, { productId, quantity: 1 }]);
     }
   }
+  function removeFromCart(productId) {
+    setProductCart(productCart.filter((item) => item.productId !== productId));
+  }
   return {
     productCart,
     addToCart,
