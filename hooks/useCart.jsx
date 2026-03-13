@@ -23,7 +23,7 @@ export default function useCart() {
   function increaseQuantity(productId) {
     setProductCart(
       productCart.map((item) =>
-        item.id === productId ? { ...item, quantity: quantity + 1 } : item,
+        item.id === productId ? { ...item, quantity: item.quantity + 1 } : item,
       ),
     );
   }
@@ -31,7 +31,9 @@ export default function useCart() {
     setProductCart(
       productCart
         .map((item) =>
-          item.id === productId ? { ...item, quantity: quantity - 1 } : item,
+          item.id === productId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item,
         )
         .filter((item) => item.quantity > 0),
     );
