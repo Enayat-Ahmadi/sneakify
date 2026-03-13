@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { useLocalStorage } from "@uidotdev/usehooks";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import useWishlist from "@/hooks/useWishlist";
+import useCart from "@/hooks/useCart";
 import {
   Card,
   CardAction,
@@ -14,6 +14,7 @@ import {
 
 export default function ProductCard({ product }) {
   const { toggleWishlist, isWishlisted } = useWishlist();
+  const { addToCart } = useCart();
 
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
@@ -47,7 +48,10 @@ export default function ProductCard({ product }) {
         <Button
           className="w-full"
           size="lg"
-          onClick={(e) => e.preventDefault()}
+          onClick={(e) => {
+            e.preventDefault();
+            addToCart(product._id);
+          }}
         >
           Add to Cart
         </Button>
