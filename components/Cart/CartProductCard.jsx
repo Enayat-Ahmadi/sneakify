@@ -26,10 +26,14 @@ export default function CartProductCard({
         <div className="flex-1 space-y-1">
           <h3 className="text-base font-semibold">{product.name}</h3>
           <p className="text-sm text-muted-foreground">{product.brand}</p>
-          <p className="text-sm font-medium">${product.price}</p>
+
+          <div className="text-sm">
+            <span className="text-muted-foreground">Price:</span>{" "}
+            <span className="font-medium">${product.price}</span>
+          </div>
         </div>
 
-        <div className="flex items-center justify-between gap-4 sm:justify-end">
+        <div className="flex items-center gap-4 sm:justify-end">
           <div className="flex items-center rounded-lg border">
             <Button
               type="button"
@@ -39,7 +43,6 @@ export default function CartProductCard({
             >
               -
             </Button>
-
             <span className="min-w-10 text-center text-sm font-medium">
               {product.quantity}
             </span>
@@ -54,7 +57,10 @@ export default function CartProductCard({
             </Button>
           </div>
 
-          <p className="w-20 text-right font-semibold">${total}</p>
+          <div className="w-24 text-right">
+            <p className="text-xs text-muted-foreground">Total</p>
+            <p className="font-semibold">${total}</p>
+          </div>
 
           <Button
             type="button"
