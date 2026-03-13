@@ -17,7 +17,7 @@ export default function Details() {
   if (isLoading) return <p>isLoading...</p>;
 
   return (
-    <div className="h-screen p-5">
+    <div className="min-h-screen p-5">
       <ProductDetails product={product} />
     </div>
   );
