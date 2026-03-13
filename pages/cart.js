@@ -8,7 +8,7 @@ export default function Cart({ products }) {
   const cartProducts =
     productCart
       .map((item) => {
-        const product = products.find((product) => product._id === item.id);
+        const product = products?.find((product) => product._id === item.id);
         if (!product) return null;
         return {
           ...product,
