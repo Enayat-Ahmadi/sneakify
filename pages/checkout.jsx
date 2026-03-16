@@ -8,8 +8,8 @@ export default function Checkout() {
     console.log(order);
   }
   return (
-    <>
+    <div className="mx-auto min-h-screen w-full max-w-7xl px-4 py-8 md:px-6">
       <CheckoutForm onSubmit={handleOrder} />
-    </>
+    </div>
   );
 }
