@@ -29,7 +29,7 @@ export default function ProductDetails({ product }) {
             <Badge variant="secondary">{product.brand}</Badge>
             <CardTitle className="text-3xl font-bold">{product.name}</CardTitle>
             <p className="text-2xl font-semibold text-primary">
-              ${product.price}
+              € {product.price}
             </p>
             <CardDescription>{product.description}</CardDescription>
             <div className="flex flex-wrap gap-2">
