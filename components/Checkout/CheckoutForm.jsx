@@ -2,10 +2,10 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Card, CardTitle, CardHeader, CardContent } from "../ui/card";
-export default function CheckoutForm() {
+export default function CheckoutForm({ onSubmit }) {
   return (
     <div className="mx-auto min-h-screen grid max-w-7xl gap-6 lg:grid-cols-3">
-      <form className="space-y-6 lg:col-span-2">
+      <form onSubmit={onSubmit} className="space-y-6 lg:col-span-2">
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle>Customer Information</CardTitle>
