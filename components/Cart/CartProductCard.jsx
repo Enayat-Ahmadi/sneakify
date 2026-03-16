@@ -24,7 +24,7 @@ export default function CartProductCard({
         <div className="space-y-1">
           <h2 className="text-lg font-semibold">{product.name}</h2>
           <p className="text-muted-foreground">{product.brand}</p>
-          <p className="text-sm">Price: ${product.price}</p>
+          <p className="text-sm">Price: € {product.price}</p>
         </div>
 
         <div className="mt-3 flex items-center gap-3 rounded-full border w-fit px-4 py-1">
@@ -45,7 +45,7 @@ export default function CartProductCard({
           </Button>
         </div>
         <div className="mt-4 flex items-center justify-between">
-          <p className="font-semibold">Total ${total.toFixed(2)}</p>
+          <p className="font-semibold">Total € {total.toFixed(2)}</p>
 
           <Button
             className="text-muted-foreground hover:text-red-500"

@@ -30,7 +30,7 @@ export default function ProductCard({ product }) {
           <Badge variant="secondary">{product.brand}</Badge>
         </CardAction>
         <CardTitle>{product.name}</CardTitle>
-        <CardDescription>{product.price} $</CardDescription>
+        <CardDescription>{product.price} €</CardDescription>
       </CardHeader>
       <CardFooter className="flex flex-col gap-2">
         <Button
