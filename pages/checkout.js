@@ -3,7 +3,7 @@ import OrderSummary from "@/components/Checkout/OrderSummary";
 import useCart from "@/hooks/useCart";
 
 export default function Checkout({ products }) {
-  const { productCart } = useCart();
+  const { productCart, clearCart } = useCart();
   const cartProducts =
     productCart
       ?.map((item) => {
@@ -25,8 +25,7 @@ export default function Checkout({ products }) {
       customer: customerInfo,
       products: cartProducts,
     };
-    console.log(customerInfo);
-    console.log(order);
+    clearCart();
   }
   return (
     <form
