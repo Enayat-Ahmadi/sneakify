@@ -1,8 +1,10 @@
 import CheckoutForm from "@/components/Checkout/CheckoutForm";
 import OrderSummary from "@/components/Checkout/OrderSummary";
 import useCart from "@/hooks/useCart";
+import { useRouter } from "next/router";
 
 export default function Checkout({ products }) {
+  const router = useRouter();
   const { productCart, clearCart } = useCart();
   const cartProducts =
     productCart
@@ -26,6 +28,7 @@ export default function Checkout({ products }) {
       products: cartProducts,
     };
     clearCart();
+    router.push("/order-success");
   }
   return (
     <form
