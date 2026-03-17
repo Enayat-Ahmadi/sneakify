@@ -34,7 +34,7 @@ export default function Checkout({ products }) {
     <form
       id="checkout-form"
       onSubmit={handleOrder}
-      className="min-h-screen bg-muted/30 px-4 py-8 md:px-8 grid max-w-7xl gap-6 lg:grid-cols-3"
+      className="min-h-screen px-4 py-8 md:px-8 grid mx-auto max-w-7xl gap-6 lg:grid-cols-3"
     >
       <div className="grid lg:col-span-2 ">
         <CheckoutForm />
