@@ -19,6 +19,13 @@ export default function Checkout({ products }) {
 
   function handleOrder(e) {
     e.preventDefault();
+    const formData = new FormData(e.target);
+    const customerInfo = Object.fromEntries(formData);
+    const order = {
+      customer: customerInfo,
+      products: cartProducts,
+    };
+    console.log(customerInfo);
     console.log(order);
   }
   return (
