@@ -12,9 +12,14 @@ import useCart from "@/hooks/useCart";
 
 export default function ProductDetails({ product }) {
   const { toggleWishlist, isWishlisted } = useWishlist();
-  const { addToCart } = useCart();
+  const { addToCart, success } = useCart();
   return (
     <Card className="mx-auto max-w-5xl overflow-hidden">
+      {success && (
+        <div className="fixed top-5 right-5 z-50 flex items-center gap-2 rounded-xl bg-green-600 px-4 py-3 text-white shadow-lg">
+          <span>Product added to shopping cart!</span>
+        </div>
+      )}
       <CardContent className="grid md:grid-cols-2 gap-8 p-6">
         <div className="relative aspect-square w-full">
           <Image
