@@ -23,26 +23,56 @@ export default function Checkout({ products }) {
     })
     .filter(Boolean);
 
-  function handleOrder(e) {
+  async function handleOrder(e) {
     e.preventDefault();
     if (loading || cartProducts.length === 0) return;
 
-    setLoading(true);
-    const formData = new FormData(e.target);
-    const customerInfo = Object.fromEntries(formData);
-    const order = {
-      customer: customerInfo,
-      products: cartProducts,
-    };
-    setTimeout(() => {
-      setLoading(false);
-      setSuccess(true);
-      clearCart?.();
+    try {
+      setLoading(true);
+      const formData = new FormData(e.target);
+      const order = {
+        customer: {
+          fullName: formData.get("fullname"),
+          email: formData.get("email"),
+          address: formData.get("address"),
+          city: formData.get("city"),
+          postalCode: formData.get("postalCode"),
+        },
+        items: cartProducts.map((product) => ({
+          productId: product._id,
+          name: product.name,
+          price: Number(product.price),
+          quantity: Number(product.quantity),
+        })),
+        totalAmount: cartProducts.reduce(
+          (sum, product) =>
+            sum + Number(product.price) * Number(product.quantity),
+          0,
+        ),
+      };
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(order),
+      });
 
-      setTimeout(() => {
-        router.push("/order-success");
-      }, 1500);
-    }, 1500);
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(
+          data.status || data.message || "Failed to create order",
+        );
+      }
+      setSuccess(true);
+      clearCart();
+      console.log("Order saved:", data.order);
+      router.push("/order-success");
+    } catch (error) {
+      console.error("Order error:", error);
+    } finally {
+      setLoading(false);
+    }
   }
   return (
     <div className="px-4 py-8 md:px-8 grid mx-auto max-w-7xl gap-6 lg:grid-cols-3">
