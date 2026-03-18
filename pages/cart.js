@@ -87,12 +87,14 @@ export default function Cart({ products }) {
             </div>
           </div>
 
-          <Button
-            size="lg"
-            className="mt-6 h-15 rounded-full bg-black text-lg font-semibold transition hover:bg-neutral-800"
-          >
-            Checkout
-          </Button>
+          <Link href="/checkout">
+            <Button
+              size="lg"
+              className="mt-6 h-15 rounded-full bg-black text-lg font-semibold transition hover:bg-neutral-800"
+            >
+              Checkout
+            </Button>
+          </Link>
           <p className="mt-4 text-xs text-muted-foreground">
             Shipping, discounts and taxes calculated at checkout.
           </p>

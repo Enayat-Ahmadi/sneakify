@@ -38,11 +38,15 @@ export default function useCart() {
         .filter((item) => item.quantity > 0),
     );
   }
+  function clearCart() {
+    setProductCart([]);
+  }
   return {
-    productCart,
+    productCart: productCart || [],
     addToCart,
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    clearCart,
   };
 }
