@@ -47,15 +47,15 @@ export default function CheckoutForm({ onSubmit }) {
       {/* Shipping Address Card */}
       <Card className="rounded-2xl">
         <CardHeader>
-          <CardTitle>Shiping Address</CardTitle>
+          <CardTitle>Shipping Address</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4 md:col-span-2">
           <Field className="space-y-2">
-            <Label htmlFor="street">Street</Label>
+            <Label htmlFor="address">Address</Label>
             <Input
               type="text"
-              name="street"
-              id="street"
+              name="address"
+              id="address"
               placeholder="Street name and house number"
               required
             />
