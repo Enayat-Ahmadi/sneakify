@@ -28,7 +28,7 @@ const orderSchema = new Schema(
       default: "pending",
     },
   },
-  { tiemstamps: true },
+  { timestamps: true },
 );
-const Order = models.Order || model("Order", orderSchema);
+const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
 export default Order;
