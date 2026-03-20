@@ -1,30 +1,18 @@
 import { Button } from "@/components/ui/button";
 import ProductsList from "@/components/ProductCard/ProductsList";
-import { useState } from "react";
+import { useMemo } from "react";
+import { useRouter } from "next/router";
 
 export default function Products({ products }) {
-  const [filteredProducts, setFilteredProducts] = useState(products);
-  const brands = [...new Set(products.map((product) => product.brand))];
+  const router = useRouter();
+  const { gender } = router.query;
+  const filteredProducts = useMemo(() => {
+    if (!gender) return products;
 
-  function handleFilter(filterBy) {
-    setFilteredProducts(
-      products.filter((product) => product.brand === filterBy),
-    );
-  }
-  function allProducts() {
-    setFilteredProducts(products);
-  }
-  console.log(filteredProducts);
+    return products.filter((product) => product.gender === gender);
+  }, [products, gender]);
   return (
-    <div>
-      <div className="text-center p-6">
-        <Button onClick={allProducts}>All Products</Button>
-        {brands.map((brand) => (
-          <Button key={brand} onClick={() => handleFilter(brand)}>
-            {brand}
-          </Button>
-        ))}
-      </div>
+    <div className="min-h-screen w-full flex flex-col items-center p-5">
       <ProductsList products={filteredProducts} />
     </div>
   );
