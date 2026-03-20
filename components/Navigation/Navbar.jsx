@@ -45,7 +45,7 @@ export default function Navbar() {
               <Menu className="w-6 h-6" />
             </Button>
             <Link href="/" className="text-xl font-bold">
-              Sneakify
+              SNEAK<span className="italic text-lime-400">ify</span>
             </Link>
           </div>
           <div className="hidden gap-6 md:flex">
@@ -110,7 +110,7 @@ export default function Navbar() {
                 className="text-xl font-bold"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Sneakfiy
+                SNEAK<span className="italic text-lime-400">ify</span>
               </Link>
               <Button
                 type="button"
