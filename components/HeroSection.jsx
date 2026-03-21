@@ -18,7 +18,7 @@ export default function HeroSection() {
         <div className="max-w-2xl text-white">
           <div className="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm backdrop-blur">
             <span className="font-semibold">
-              Sneak<span className="text-neutral-300">ify</span>
+              Sneak<span className="italic text-lime-400">ify</span>
             </span>
           </div>
 
