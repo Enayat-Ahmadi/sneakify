@@ -81,13 +81,6 @@ export default function Navbar({ products }) {
             <Search onClick={() => setOpen(true)} />
             {open && (
               <div className="fixed inset-0 z-50 bg-white p-6">
-                <Button
-                  variant="ghost"
-                  onClick={() => setOpen(false)}
-                  className="absolute right-19"
-                >
-                  Cancel
-                </Button>
                 <SearchOverly
                   products={products}
                   onClose={() => setOpen(false)}
