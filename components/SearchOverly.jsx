@@ -1,7 +1,7 @@
 import { Input } from "./ui/input";
-import { Button } from "./ui/button";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { Search } from "lucide-react";
 
 export default function SearchOverly({ products }) {
   const router = useRouter();
@@ -26,7 +26,7 @@ export default function SearchOverly({ products }) {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <form onSubmit={handleSerach} className="flex">
+      <form onSubmit={handleSerach} className="relative flex">
         <Input
           type="text"
           name="search"
@@ -36,6 +36,13 @@ export default function SearchOverly({ products }) {
           onChange={(e) => setSearch(e.target.value)}
           className="w-full rounded-full border px-4 py-3 text-lg outline-none"
         />
+        <button
+          type="submit"
+          variant="ghost"
+          className="absolute right-2 top-1"
+        >
+          <Search />
+        </button>
       </form>
       <div className="mt-4 space-y-2">
         {query &&
