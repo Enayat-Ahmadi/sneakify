@@ -89,7 +89,10 @@ export default function Navbar({ products }) {
                 >
                   Cancel
                 </Button>
-                <SearchOverly products={products} />
+                <SearchOverly
+                  products={products}
+                  onclose={() => setOpen(false)}
+                />
               </div>
             )}
             <div className="relative">

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { Search } from "lucide-react";
 
-export default function SearchOverly({ products }) {
+export default function SearchOverly({ products, onclose }) {
   const router = useRouter();
   const [search, setSearch] = useState(router.query.search || "");
   const query = search.toLocaleLowerCase().trim();
@@ -24,6 +24,7 @@ export default function SearchOverly({ products }) {
     });
   }
   function handleProductClick(productId) {
+    onclose();
     router.push(`/${productId}`);
   }
   return (
