@@ -2,7 +2,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Product from "@/db/models/Product";
+
 
 export default function SearchOverly({ products }) {
   const router = useRouter();

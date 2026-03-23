@@ -6,6 +6,7 @@ import useCart from "@/hooks/useCart";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { useState } from "react";
+import SearchOverly from "../SearchOverly";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -13,7 +14,7 @@ const navItems = [
   { label: "Women", href: "/products?gender=women", gender: "women" },
   { label: "Kids", href: "/products?gender=kids", gender: "kids" },
 ];
-export default function Navbar() {
+export default function Navbar({ products }) {
   const router = useRouter();
   const { pathname, query } = router;
   const { wishlist } = useWishlist();
@@ -76,6 +77,8 @@ export default function Navbar() {
           </div>
 
           <div className="flex gap-6">
+            {/* Search form */}
+            <SearchOverly products={products} />
             <div className="relative">
               <Link href="/wishlist">
                 <Heart className="w-7 h-7" />

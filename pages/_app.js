@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <Navbar />
+      <Navbar products={products} />
       <Component {...pageProps} products={products} error={error} />
       <Footer />
     </>
