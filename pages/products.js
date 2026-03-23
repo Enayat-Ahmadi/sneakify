@@ -10,7 +10,11 @@ export default function Products({ products }) {
   const gender = router.query.gender || "";
 
   let filteredProducts = [...products];
-  if (gender) {
+  if (gender === "kids") {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.sizes.some((size) => size <= 38),
+    );
+  } else if (gender) {
     filteredProducts = filteredProducts.filter(
       (product) => product.gender.toLowerCase() === gender.toLowerCase(),
     );
