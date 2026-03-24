@@ -31,7 +31,7 @@ export default function SearchOverly({ products, onClose }) {
   }
   function handleProductClick(productId) {
     onClose();
-    router.push(`/details/${productId}`);
+    router.push(`/products/${productId}`);
   }
   function clearSearch() {
     setSearch("");

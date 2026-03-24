@@ -7,7 +7,7 @@ export default function ProductsList({ products }) {
       {products?.map((product) => {
         return (
           <li key={product._id}>
-            <Link href={`/details/${product._id}`}>
+            <Link href={`/products/${product._id}`}>
               <ProductCard product={product} />
             </Link>
           </li>
