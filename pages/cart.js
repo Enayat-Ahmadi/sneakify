@@ -2,6 +2,7 @@ import useCart from "@/hooks/useCart";
 import { Button } from "@/components/ui/button";
 import CartProductCard from "@/components/Cart/CartProductCard";
 import Link from "next/link";
+import EmptyState from "@/components/ui/EmpatyState";
 
 export default function Cart({ products }) {
   const { productCart, removeFromCart, increaseQuantity, decreaseQuantity } =
@@ -26,15 +27,10 @@ export default function Cart({ products }) {
 
   if (cartProducts.length === 0) {
     return (
-      <div className="flex min-h-[70vh] flex-col items-center justify-center gap-4 px-5 text-center">
-        <h1 className="text-2xl font-bold">Your cart is empty</h1>
-        <p className="text-muted-foreground">
-          Looks like you have not added anything yet.
-        </p>
-        <Button size="lg" variant="">
-          <Link href="/">Continue Shopping</Link>
-        </Button>
-      </div>
+      <EmptyState
+        title="Your cart is empty"
+        message="Looks like you haven’t added any sneakers yet."
+      />
     );
   }
 
