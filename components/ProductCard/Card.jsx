@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
+import { Heart } from "lucide-react";
+import SuccessMessage from "../ui/SuccessMessage";
 
 import {
   Card,
@@ -19,11 +21,7 @@ export default function ProductCard({ product }) {
 
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
-      {success && (
-        <div className="fixed top-5 right-5 z-50 flex items-center gap-2 rounded-xl bg-green-600 px-4 py-3 text-white shadow-lg">
-          <span>Product added to shopping cart!</span>
-        </div>
-      )}
+      {success && <SuccessMessage message="Product added to shopping cart!" />}
       <Image
         src={product.images?.[0]}
         alt={product.name}
@@ -38,22 +36,10 @@ export default function ProductCard({ product }) {
         <CardTitle>{product.name}</CardTitle>
         <CardDescription>{product.price} €</CardDescription>
       </CardHeader>
-      <CardFooter className="flex flex-col gap-2">
+      <CardFooter className="flex gap-5 ">
         <Button
-          className="w-full"
-          size="lg"
-          onClick={(e) => {
-            e.preventDefault();
-            toggleWishlist(product._id);
-          }}
-        >
-          {isWishlisted(product._id)
-            ? "remove from wishlist"
-            : "Add to Wishlist"}
-        </Button>
-        <Button
-          className="w-full"
-          size="lg"
+          className="w-[80%] h-9 rounded-2xl"
+          size=""
           onClick={(e) => {
             e.preventDefault();
             addToCart(product._id);
@@ -61,6 +47,19 @@ export default function ProductCard({ product }) {
         >
           Add to Cart
         </Button>
+        <button
+          className="hover:cursor-pointer"
+          onClick={(e) => {
+            e.preventDefault();
+            toggleWishlist(product._id);
+          }}
+        >
+          {isWishlisted(product._id) ? (
+            <Heart className="text-red-700 fill-red-600 rounded-full w-7 h-7" />
+          ) : (
+            <Heart className="w-7 h-7" />
+          )}
+        </button>
       </CardFooter>
     </Card>
   );

@@ -19,6 +19,7 @@ export default function Checkout({ products }) {
       return {
         ...product,
         quantity: item.quantity,
+        size: item.size,
       };
     })
     .filter(Boolean);
@@ -42,6 +43,7 @@ export default function Checkout({ products }) {
           productId: product._id,
           name: product.name,
           price: Number(product.price),
+          size: Number(product.size),
           quantity: Number(product.quantity),
         })),
         totalAmount: cartProducts.reduce(
@@ -87,7 +89,7 @@ export default function Checkout({ products }) {
         <CheckoutForm />
         <Button
           type="submit"
-          className="w-full rounded-xl"
+          className="w-full h-12 rounded-full font-semibold"
           size="lg"
           disabled={loading || success || cartProducts.length === 0}
         >
