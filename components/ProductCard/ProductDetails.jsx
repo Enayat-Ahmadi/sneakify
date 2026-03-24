@@ -112,7 +112,7 @@ export default function ProductDetails({ product }) {
               </div>
             </div>
             {sizeAlert && (
-              <p className="text-red-500 text-lg">Plase select a size</p>
+              <p className="text-red-500 text-lg">Please select a size</p>
             )}
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button
