@@ -18,14 +18,16 @@ export default function ProductDetails({ product }) {
   const { addToCart, success } = useCart();
   const [selectedImage, setSelectedImage] = useState(product.images?.[0] || "");
   const [selectedSize, setSelectedSize] = useState(null);
+  const [sizeAlert, setSizeAlert] = useState(false);
 
   function handleAddToCart() {
     if (!selectedSize) {
-      alert("Please select a size");
+      setSizeAlert(true);
       return;
     }
 
     addToCart(product._id, selectedSize);
+    setSizeAlert(false);
   }
 
   return (
@@ -109,6 +111,9 @@ export default function ProductDetails({ product }) {
                 ))}
               </div>
             </div>
+            {sizeAlert && (
+              <p className="text-red-500 text-lg">Plase select a size</p>
+            )}
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button
                 size="lg"
