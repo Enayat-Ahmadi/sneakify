@@ -140,6 +140,9 @@ body {
     @apply font-sans;
   }
 }
+.btn-hover {
+  @apply hover:bg-neutral-800 hover:scale-[1.02] transition duration-300;
+}
 @keyframes loadingBar {
   0% {
     transform: translateX(-120%);
