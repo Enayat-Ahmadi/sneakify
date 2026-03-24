@@ -23,7 +23,6 @@ export default function Checkout({ products }) {
       };
     })
     .filter(Boolean);
-  console.log(cartProducts);
 
   async function handleOrder(e) {
     e.preventDefault();
@@ -90,7 +89,7 @@ export default function Checkout({ products }) {
         <CheckoutForm />
         <Button
           type="submit"
-          className="w-full rounded-xl"
+          className="w-full h-12 rounded-full font-semibold"
           size="lg"
           disabled={loading || success || cartProducts.length === 0}
         >
