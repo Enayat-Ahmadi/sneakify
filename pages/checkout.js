@@ -35,6 +35,7 @@ export default function Checkout({ products }) {
         customer: {
           fullName: formData.get("fullname"),
           email: formData.get("email"),
+          phone: formData.get("phone"),
           address: formData.get("address"),
           city: formData.get("city"),
           postalCode: formData.get("postalCode"),
