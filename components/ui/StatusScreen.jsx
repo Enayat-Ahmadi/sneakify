@@ -63,7 +63,7 @@ export default function StatusScreen({
 
         {isLoading && (
           <div className="mt-10 w-full max-w-xs">
-            <div className="h-[3px] overflow-hidden rounded-full bg-black/10">
+            <div className="h-0.75 overflow-hidden rounded-full bg-black/10">
               <div className="h-full w-1/3 animate-[loadingBar_1.2s_ease-in-out_infinite] rounded-full bg-black" />
             </div>
           </div>
