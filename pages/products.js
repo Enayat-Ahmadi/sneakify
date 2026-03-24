@@ -38,8 +38,8 @@ export default function Products({ products }) {
     );
   }
   return (
-    <div className="min-h-screen w-full flex flex-col items-center p-5">
+    <main className="min-h-screen w-full flex flex-col items-center p-5">
       <ProductsList products={filteredProducts} />
-    </div>
+    </main>
   );
 }
