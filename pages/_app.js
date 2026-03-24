@@ -3,7 +3,7 @@ import Navbar from "@/components/Navigation/Navbar";
 import Footer from "@/components/Footer/Footer";
 import useSWR from "swr";
 import Loader from "@/components/ui/LoadingScreen";
-import ErrorScreen from "@/components/ErrorScreen";
+import ErrorScreen from "@/components/ui/ErrorScreen";
 
 
 
