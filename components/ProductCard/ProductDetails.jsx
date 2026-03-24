@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Heart } from "lucide-react";
 import {
   CardContent,
   Card,
@@ -10,60 +11,118 @@ import { Button } from "@/components/ui/button";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
 import SuccessMessage from "../ui/SuccessMessage";
+import { useState } from "react";
 
 export default function ProductDetails({ product }) {
   const { toggleWishlist, isWishlisted } = useWishlist();
   const { addToCart, success } = useCart();
+  const [selectedImage, setSelectedImage] = useState(product.images?.[0] || "");
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  function handleAddToCart() {
+    if (!selectedSize) {
+      alert("Please select a size");
+      return;
+    }
+
+    addToCart(product._id, selectedSize);
+  }
+
   return (
-    <Card className="mx-auto max-w-5xl overflow-hidden">
+    <Card className="mx-auto max-w-6xl overflow-hidden">
       {success && <SuccessMessage message="Product added to shopping cart!" />}
       <CardContent className="grid md:grid-cols-2 gap-8 p-6">
-        <div className="relative aspect-square w-full">
-          <Image
-            src={product.images?.[0]}
-            alt={product.name}
-            fill
-            className="object-cover rounded-lg"
-          />
+        <div className="space-y-4">
+          <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-muted">
+            <Image
+              src={selectedImage}
+              alt={product.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="grid grid-cols-4 gap-3">
+            {product.images?.map((image, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedImage(image)}
+                className={`relative aspect-square overflow-hidden rounded-xl border ${
+                  selectedImage === image ? "border-black" : "border-muted"
+                }`}
+              >
+                <Image
+                  src={image}
+                  alt={`${product.name} ${index + 1}`}
+                  fill
+                  className="object-cover"
+                />
+              </button>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col justify-between gap-6">
+        {/* DETAILS */}
+        <div className="flex flex-col justify-between space-y-6">
           <div className="space-y-4">
-            <Badge variant="secondary">{product.brand}</Badge>
-            <CardTitle className="text-3xl font-bold">{product.name}</CardTitle>
-            <p className="text-2xl font-semibold text-primary">
-              € {product.price}
-            </p>
-            <CardDescription>{product.description}</CardDescription>
-            <div className="flex flex-wrap gap-2">
-              {product.sizes?.map((size) => (
-                <Badge key={size} variant="outline">
-                  EU {size}
-                </Badge>
-              ))}
+            <div className="flex items-start justify-between gap-4">
+              <div className="space-y-2">
+                <Badge variant="secondary">{product.brand}</Badge>
+                <h1 className="text-3xl font-bold">{product.name}</h1>
+                <p className="text-2xl font-semibold">{product.price} €</p>
+              </div>
+
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => toggleWishlist(product._id)}
+                className="rounded-full w-9 h-9"
+              >
+                {isWishlisted(product._id) ? (
+                  <Heart className="text-red-700 fill-red-600 rounded-full w-7 h-7" />
+                ) : (
+                  <Heart className="w-7 h-7" />
+                )}
+              </Button>
             </div>
-            <p className="text-sm text-muted-foreground">
-              {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
+
+            <p className="text-sm leading-6 text-muted-foreground">
+              {product.description}
             </p>
           </div>
-          <div className="flex gap-3">
-            <Button
-              size="lg"
-              className="flex-1"
-              onClick={() => addToCart(product._id)}
-            >
-              Add to Cart
-            </Button>
-            <Button
-              variant="outline"
-              onClick={(e) => {
-                e.preventDefault();
-                toggleWishlist(product._id);
-              }}
-            >
-              {isWishlisted(product._id)
-                ? "remove from wishlist"
-                : "Add to Wishlist"}
-            </Button>
+
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium">Select Size</p>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
+                {product.sizes?.map((size) => (
+                  <Button
+                    key={size}
+                    type="button"
+                    variant={selectedSize === size ? "default" : "outline"}
+                    onClick={() => setSelectedSize(size)}
+                    className="h-12"
+                  >
+                    {size}
+                  </Button>
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button
+                size="lg"
+                onClick={handleAddToCart}
+                className="h-12 rounded-full"
+              >
+                Add to Cart
+              </Button>
+            </div>
+            <div className="space-y-2 rounded-2xl bg-muted p-4 text-sm">
+              <p>Free delivery on orders over 100 €</p>
+              <p>30 days return policy</p>
+              <p>Secure checkout</p>
+            </div>
           </div>
         </div>
       </CardContent>
