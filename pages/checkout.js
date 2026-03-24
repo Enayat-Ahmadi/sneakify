@@ -89,7 +89,7 @@ export default function Checkout({ products }) {
         <CheckoutForm />
         <Button
           type="submit"
-          className="w-full h-12 rounded-full font-semibold"
+          className="w-full h-12 rounded-full font-semibold btn-hover"
           size="lg"
           disabled={loading || success || cartProducts.length === 0}
         >

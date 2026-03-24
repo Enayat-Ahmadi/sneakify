@@ -38,7 +38,7 @@ export default function ProductCard({ product }) {
       </CardHeader>
       <CardFooter className="flex gap-5 ">
         <Button
-          className="w-[80%] h-9 rounded-2xl"
+          className="w-[80%] h-9 rounded-2xl btn-hover"
           size=""
           onClick={(e) => {
             e.preventDefault();

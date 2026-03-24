@@ -87,7 +87,7 @@ export default function Cart({ products }) {
           <Link href="/checkout">
             <Button
               size="lg"
-              className="mt-6 h-12 rounded-full bg-black text-lg font-semibold transition hover:bg-neutral-800"
+              className="mt-6 h-12 rounded-full bg-black text-lg font-semibold btn-hover"
             >
               Checkout
             </Button>
