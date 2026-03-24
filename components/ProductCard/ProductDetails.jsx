@@ -118,7 +118,7 @@ export default function ProductDetails({ product }) {
               <Button
                 size="lg"
                 onClick={handleAddToCart}
-                className="h-12 rounded-full"
+                className="h-12 rounded-full btn-hover font-semibold"
               >
                 Add to Cart
               </Button>

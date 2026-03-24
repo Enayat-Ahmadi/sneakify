@@ -141,7 +141,7 @@ body {
   }
 }
 .btn-hover {
-  @apply hover:bg-neutral-800 hover:scale-[1.02] transition duration-300;
+  @apply hover:bg-neutral-800 hover:scale-[1.02] transition duration-300 cursor-pointer;
 }
 @keyframes loadingBar {
   0% {
