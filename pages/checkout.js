@@ -3,10 +3,7 @@ import OrderSummary from "@/components/Checkout/OrderSummary";
 import useCart from "@/hooks/useCart";
 import { useRouter } from "next/router";
 
-
-
 export default function Checkout({ products }) {
-
   const router = useRouter();
   const { productCart, clearCart } = useCart();
   const cartProducts = productCart
@@ -37,6 +34,9 @@ export default function Checkout({ products }) {
           city: formData.get("city"),
           postalCode: formData.get("postalCode"),
         },
+        payment: {
+          method: formData.get("paymentMethod"),
+        },
         items: cartProducts.map((product) => ({
           productId: product._id,
           name: product.name,
@@ -64,7 +64,7 @@ export default function Checkout({ products }) {
           data.status || data.message || "Failed to create order",
         );
       }
-      
+
       clearCart();
       console.log("Order saved:", data.order);
       router.push("/order-success");
