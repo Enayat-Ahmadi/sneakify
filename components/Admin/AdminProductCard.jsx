@@ -3,8 +3,24 @@ import Link from "next/link";
 import { Pencil, Trash2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import DeleteConfirmModal from "../ui/DeleteConfirmModal";
+import { useState } from "react";
 
 export default function AdminProductCard({ product, onDelete }) {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function handleDelete() {
+    try {
+      setLoading(true);
+      await onDelete(product._id);
+      setOpen(false);
+    } catch (error) {
+      console.error("Delete failed:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <Card>
       <CardContent className="p-4 md:p-6">
@@ -43,12 +59,20 @@ export default function AdminProductCard({ product, onDelete }) {
             <Button
               variant="destructive"
               className="rounded-full"
-              onClick={() => onDelete(product._id)}
+              onClick={() => setOpen(true)}
             >
               <Trash2 className="h-4 w-4" />
             </Button>
           </div>
         </div>
+        <DeleteConfirmModal
+          open={open}
+          onOpenChange={setOpen}
+          onConfirm={handleDelete}
+          title="Delete product"
+          description={`Are you sure you want to delete "${product.name}"? This action cannot be undone.`}
+          loading={loading}
+        />
       </CardContent>
     </Card>
   );

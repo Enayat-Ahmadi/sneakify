@@ -5,8 +5,9 @@ import { Plus } from "lucide-react";
 import useSWR from "swr";
 import ErrorScreen from "@/components/ui/ErrorScreen";
 import LoadingScreen from "@/components/ui/LoadingScreen";
+
 export default function AdminProductPage() {
-  const { data: products, error, isLoading, mutate } = useSWR("/api/products");
+  const { data, error, isLoading, mutate } = useSWR("/api/products");
   if (error) return <ErrorScreen />;
   if (isLoading) return <LoadingScreen />;
   async function handleDelete(productId) {
@@ -17,7 +18,7 @@ export default function AdminProductPage() {
       mutate("/api/products");
     }
   }
-  const productsData = Array.isArray(products) ? products : [];
+  const products = Array.isArray(data) ? data : [];
   return (
     <main className="max-w-6xl min-h-screen flex flex-col mx-auto gap-3 bg-background px-4 py-8 md:px-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -45,8 +46,8 @@ export default function AdminProductPage() {
           <p className="text-sm text-muted-foreground">Low Stock</p>
           <p className="text-2xl font-bold">
             {
-              products.filter(
-                (product) => product.stock > 0 && product.stock <= 5,
+              products?.filter(
+                (product) => product?.stock > 0 && product.stock <= 5,
               ).length
             }
           </p>
@@ -54,12 +55,12 @@ export default function AdminProductPage() {
         <div className="rounded-2xl border p-4">
           <p className="text-sm text-muted-foreground">Out of Stock</p>
           <p className="text-2xl font-bold">
-            {products.filter((product) => product.stock === 0).length}
+            {products?.filter((product) => product.stock === 0).length}
           </p>
         </div>
       </div>
 
-      <AdminProductsList products={productsData} onDelete={handleDelete} />
+      <AdminProductsList products={products} onDelete={handleDelete} />
     </main>
   );
 }
