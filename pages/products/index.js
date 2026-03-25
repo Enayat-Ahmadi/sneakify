@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import ProductsList from "@/components/ProductCard/ProductsList";
+import ProductsList from "@/components/Product/ProductsList";
 import { useMemo } from "react";
 import { useRouter } from "next/router";
 import EmptyState from "@/components/ui/EmpatyState";
