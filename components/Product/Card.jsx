@@ -20,7 +20,7 @@ export default function ProductCard({ product }) {
   const { addToCart, success } = useCart();
 
   return (
-    <Card className="relative mx-auto w-full max-w-sm pt-0">
+    <Card className="relative mx-auto w-full max-w-sm pt-0 transition hover:shadow-md hover:scale-[1.01]">
       {success && <SuccessMessage message="Product added to shopping cart!" />}
       <Image
         src={product.images?.[0]}
