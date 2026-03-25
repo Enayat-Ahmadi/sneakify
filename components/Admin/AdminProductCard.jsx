@@ -4,7 +4,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-export default function AdminProductCard({ product }) {
+export default function AdminProductCard({ product, onDelete }) {
   return (
     <Card>
       <CardContent className="p-4 md:p-6">
@@ -40,7 +40,11 @@ export default function AdminProductCard({ product }) {
               </Button>
             </Link>
 
-            <Button variant="destructive" className="rounded-full">
+            <Button
+              variant="destructive"
+              className="rounded-full"
+              onClick={() => onDelete(product._id)}
+            >
               <Trash2 className="h-4 w-4" />
             </Button>
           </div>

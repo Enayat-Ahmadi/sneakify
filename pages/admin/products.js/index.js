@@ -2,7 +2,21 @@ import AdminProductsList from "@/components/Admin/AdminProductList";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import { mutate } from "swr";
 export default function AdminProductPage({ products }) {
+  async function handleDelete(productId) {
+    try {
+      const response = await fetch(`/api/products/${productId}`, {
+        method: "DELETE ",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete product");
+      }
+      mutate();
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <main className="min-h-screen bg-background px-4 py-8 md:px-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -20,7 +34,7 @@ export default function AdminProductPage({ products }) {
           </Button>
         </Link>
       </div>
-      <AdminProductsList products={products} />
+      <AdminProductsList products={products} onDelete={handleDelete} />
     </main>
   );
 }
