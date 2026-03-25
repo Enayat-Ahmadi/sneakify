@@ -1,9 +1,8 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import ProductDetails from "@/components/ProductCard/ProductDetails";
+import ProductDetails from "@/components/Product/ProductDetails";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import ErrorScreen from "@/components/ui/ErrorScreen";
-
 
 export default function Details() {
   const router = useRouter();

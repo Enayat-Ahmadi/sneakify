@@ -1,4 +1,4 @@
-import ProductsList from "@/components/ProductCard/ProductsList";
+import ProductsList from "@/components/Product/ProductsList";
 import useWishlist from "@/hooks/useWishlist";
 import EmptyState from "@/components/ui/EmpatyState";
 import { Heart } from "lucide-react";
