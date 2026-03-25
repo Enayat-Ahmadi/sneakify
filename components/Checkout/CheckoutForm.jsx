@@ -1,12 +1,26 @@
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Field } from "../ui/field";
+import { Loader2, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import { Button } from "../ui/button";
 import { Card, CardTitle, CardHeader, CardContent } from "../ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-export default function CheckoutForm({ onSubmit }) {
+export default function CheckoutForm({ onSubmit, cartProducts }) {
+  const [formState, setFormState] = useState("default");
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      setFormState("loading");
+      await onSubmit(e);
+      setFormState("success");
+    } catch (error) {
+      setFormState(error);
+    }
+  }
   return (
-    <div className="space-y-6">
+    <form className="space-y-6" onSubmit={handleSubmit}>
       {/* Customer Information Card */}
       <Card className="rounded-2xl">
         <CardHeader>
@@ -106,6 +120,30 @@ export default function CheckoutForm({ onSubmit }) {
           </RadioGroup>
         </CardContent>
       </Card>
-    </div>
+      <Button
+        type="submit"
+        className="w-full h-12 rounded-full font-semibold btn-hover"
+        size="lg"
+        disabled={
+          formState === "loading " ||
+          formState === "success" ||
+          cartProducts?.length === 0
+        }
+      >
+        {formState === "loading " ? (
+          <span className="flex items-center gap-2">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Processing...
+          </span>
+        ) : formState === "success" ? (
+          <span className="flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4" />
+            Order Placed
+          </span>
+        ) : (
+          "Place Order"
+        )}
+      </Button>
+    </form>
   );
 }
