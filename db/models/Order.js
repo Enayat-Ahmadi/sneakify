@@ -25,6 +25,13 @@ const orderSchema = new Schema(
       },
     ],
     totalAmount: { type: Number, required: true },
+    payment: {
+      method: {
+        type: String,
+        enum: ["card", "paypal"],
+        required: true,
+      },
+    },
     status: {
       type: String,
       default: "pending",

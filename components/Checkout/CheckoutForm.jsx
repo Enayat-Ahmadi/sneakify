@@ -1,12 +1,26 @@
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Field } from "../ui/field";
+import { Loader2, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import { Button } from "../ui/button";
 import { Card, CardTitle, CardHeader, CardContent } from "../ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-export default function CheckoutForm({ onSubmit }) {
+export default function CheckoutForm({ onSubmit, cartProducts }) {
+  const [formState, setFormState] = useState("default");
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      setFormState("loading");
+      await onSubmit(e);
+      setFormState("success");
+    } catch (error) {
+      setFormState(error);
+    }
+  }
   return (
-    <div className="space-y-6">
+    <form className="space-y-6" onSubmit={handleSubmit}>
       {/* Customer Information Card */}
       <Card className="rounded-2xl">
         <CardHeader>
@@ -20,6 +34,7 @@ export default function CheckoutForm({ onSubmit }) {
               id="fullname"
               name="fullname"
               placeholder="John Doe"
+              autoComplete="name"
               required
             />
           </Field>
@@ -29,16 +44,18 @@ export default function CheckoutForm({ onSubmit }) {
               type="email"
               id="email"
               name="email"
-              placeholder="email@email.com"
+              placeholder="johnDoe@email.com"
+              autoComplete="email"
               required
             />
           </Field>
           <Field className="space-y-2">
             <Label htmlFor="phone">Phone</Label>
             <Input
-              type="phone"
+              type="tel"
               name="phone"
               placeholder="+49 123 456789"
+              autoComplete="tel"
               required
             />
           </Field>
@@ -57,6 +74,7 @@ export default function CheckoutForm({ onSubmit }) {
               name="address"
               id="address"
               placeholder="Street name and house number"
+              autoComplete="street-address"
               required
             />
           </Field>
@@ -68,16 +86,19 @@ export default function CheckoutForm({ onSubmit }) {
                 name="city"
                 id="city"
                 placeholder="Berlin"
+                autoComplete="adress-level2"
                 required
               />
             </Field>
             <Field className="space-y-2">
               <Label htmlFor="postalCode">Postal Code</Label>
               <Input
-                type="number"
+                type="text"
                 name="postalCode"
                 id="postalCode"
                 placeholder="10233"
+                autoComplete="postal-code"
+                pattern="[0-9]{5}"
                 required
               />
             </Field>
@@ -90,7 +111,11 @@ export default function CheckoutForm({ onSubmit }) {
           <CardTitle>Payment Method</CardTitle>
         </CardHeader>
         <CardContent>
-          <RadioGroup className="grid gap-4 grid-cols-2">
+          <RadioGroup
+            name="paymentMethod"
+            defaultValue="card"
+            className="grid gap-4 grid-cols-2"
+          >
             <div className="flex items-center gap-3 rounded-xl border p-4">
               <RadioGroupItem value="card" id="card" />
               <Label htmlFor="card" className="cursor-pointer">
@@ -106,6 +131,30 @@ export default function CheckoutForm({ onSubmit }) {
           </RadioGroup>
         </CardContent>
       </Card>
-    </div>
+      <Button
+        type="submit"
+        size="lg"
+        className="w-full h-12 rounded-full font-semibold btn-hover"
+        disabled={
+          formState === "loading " ||
+          formState === "success" ||
+          cartProducts?.length === 0
+        }
+      >
+        {formState === "loading " ? (
+          <span className="flex items-center gap-2">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Processing...
+          </span>
+        ) : formState === "success" ? (
+          <span className="flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4" />
+            Order Placed
+          </span>
+        ) : (
+          "Place Order"
+        )}
+      </Button>
+    </form>
   );
 }
