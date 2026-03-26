@@ -79,8 +79,7 @@ export default function ProductForm({
           .map((img) => img.trim())
           .filter(Boolean),
       };
-
-      // 🔥 validation (important)
+      
       if (
         !productData.name ||
         !productData.price ||
