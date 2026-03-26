@@ -11,6 +11,24 @@ export default function Orders() {
   const orders = Array.isArray(data) ? data : [];
   return (
     <main className="max-w-6xl min-h-screen flex flex-col mx-auto gap-3 bg-background px-4 py-8 md:px-8">
+      <div className="grid gap-4 sm:grid-cols-3">
+        <div className="rounded-2xl border p-4 card-hover">
+          <p className="text-sm text-muted-foreground">Total Orders</p>
+          <p className="text-2xl font-bold">{orders.length}</p>
+        </div>
+        <div className="rounded-2xl border p-4 card-hover">
+          <p className="text-sm text-muted-foreground">Shipped Orders</p>
+          <p className="text-2xl font-bold">
+            {orders?.filter((order) => order.status === "shipped").length}
+          </p>
+        </div>
+        <div className="rounded-2xl border p-4 card-hover">
+          <p className="text-sm text-muted-foreground">Pending Orders</p>
+          <p className="text-2xl font-bold">
+            {orders?.filter((order) => order.status === "pending").length}
+          </p>
+        </div>
+      </div>
       {orders.map((order) => (
         <AdminOrderCard key={order._id} order={order} />
       ))}
