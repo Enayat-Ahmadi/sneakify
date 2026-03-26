@@ -90,7 +90,7 @@
 } */
 
 body {
-  background: var(--background);
+  background: var(--backgroun);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -141,10 +141,13 @@ body {
   }
 }
 .btn-hover {
-  @apply hover:bg-neutral-800 hover:scale-[1.02] transition duration-300 cursor-pointer;
+  @apply  hover:scale-[1.02] transition duration-300 cursor-pointer;
 }
 .card-hover {
-  @apply hover:shadow-md hover:scale-[1.01] transition cursor-pointer;
+  @apply hover:shadow-md hover:scale-[1.01] transition;
+}
+.glass {
+  @apply border-white/20 bg-primary/40  backdrop-blur-xl shadow-lg;
 }
 @keyframes loadingBar {
   0% {
