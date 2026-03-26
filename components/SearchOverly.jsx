@@ -37,7 +37,7 @@ export default function SearchOverly({ products, onClose }) {
     setSearch("");
   }
   return (
-    <div className="max-w-3xl min-h-screen mx-auto rounded-2xl border glass">
+    <div className="max-w-3xl h-[60%] overflow-auto mx-auto rounded-2xl border glass p-2">
       <div className="relative max-w-2xl mx-auto">
         <form onSubmit={handleSerach} className="relative flex w-full">
           <Input
@@ -52,14 +52,14 @@ export default function SearchOverly({ products, onClose }) {
           <button
             type="submit"
             variant="ghost"
-            className="absolute left-3 top-6"
+            className="absolute left-3 top-6 btn-hover"
           >
             <Search />
           </button>
         </form>
         <button
           onClick={search ? clearSearch : onClose}
-          className="absolute right-3 top-6"
+          className="absolute right-3 top-6 btn-hover"
         >
           <X />
         </button>

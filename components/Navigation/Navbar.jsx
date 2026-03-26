@@ -71,7 +71,7 @@ export default function Navbar({ products }) {
           </div>
 
           <div className="flex gap-6">
-            <Search onClick={() => setOpen(true)} />
+            <Search onClick={() => setOpen(true)} className="btn-hover"/>
             {open && (
               <div className="fixed mx-auto inset-0 z-100 p-4">
                 <SearchOverly
