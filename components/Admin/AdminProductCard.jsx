@@ -22,7 +22,7 @@ export default function AdminProductCard({ product, onDelete }) {
     }
   }
   return (
-    <Card className="transition hover:shadow-md hover:scale-[1.01]">
+    <Card className="card-hover">
       <CardContent className="p-4 md:p-6">
         <div className="space-y-4 ">
           <div className="flex gap-4">
