@@ -37,29 +37,29 @@ export default function SearchOverly({ products, onClose }) {
     setSearch("");
   }
   return (
-    <div className="max-w-2xl min-h-screen mx-auto">
+    <div className="max-w-3xl min-h-screen mx-auto rounded-2xl border glass">
       <div className="relative max-w-2xl mx-auto">
         <form onSubmit={handleSerach} className="relative flex w-full">
           <Input
             type="text"
             name="search"
             id="search"
-            placeholder="search product..."
+            placeholder="Search product..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="min-w-75 h-12 rounded-full border px-4 py-3 text-lg outline-none pl-9"
+            className="w-full h-12 rounded-full border px-4 py-3 text-lg text-black pl-9 mt-3 placeholder:text-primary"
           />
           <button
             type="submit"
             variant="ghost"
-            className="absolute left-2 top-3"
+            className="absolute left-3 top-6"
           >
             <Search />
           </button>
         </form>
         <button
           onClick={search ? clearSearch : onClose}
-          className="absolute right-2 top-3"
+          className="absolute right-3 top-6"
         >
           <X />
         </button>
@@ -72,18 +72,18 @@ export default function SearchOverly({ products, onClose }) {
           actionHref="/products"
         />
       )}
-      <div className="mt-4 space-y-2">
+      <div className="max-w-2xl mx-auto flex flex-col mt-4 gap-3">
         {query &&
           result.slice(0, 5).map((product) => (
-            <button
+            <div
               key={product._id}
               type="button"
               onClick={() => handleProductClick(product._id)}
-              className="block w-full rounded-xl border p-3 text-left hover:bg-neutral-100"
+              className="rounded-xl border p-3 text-left bg-card/60 card-hover"
             >
               <p className="font-medium">{product.name}</p>
-              <p className="text-sm text-neutral-500">{product.brand}</p>
-            </button>
+              <p className="text-sm">{product.brand}</p>
+            </div>
           ))}
       </div>
     </div>
