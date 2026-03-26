@@ -29,8 +29,8 @@ export default function AdminProductPage() {
           </p>
         </div>
 
-        <Link href="/admin/products/new">
-          <Button className="rounded-full">
+        <Link href="/admin/products/addProduct">
+          <Button className="rounded-full btn-hever">
             <Plus className="mr-2 h-4 w-4" />
             Add Product
           </Button>
