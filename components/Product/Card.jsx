@@ -27,7 +27,7 @@ export default function ProductCard({ product }) {
         alt={product.name}
         width={800}
         height={450}
-        className="relative z-20 aspect-video w-full object-cover brightness-60  dark:brightness-40"
+        className="relative z-20 aspect-video w-full object-cover brightness-60  dark:brightness-40 "
       />
       <CardHeader>
         <CardAction>
