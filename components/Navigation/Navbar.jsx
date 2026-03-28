@@ -4,10 +4,8 @@ import { useRouter } from "next/router";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
 import { useState, useEffect } from "react";
 import SearchOverly from "../SearchOverly";
-import Image from "next/image";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -149,8 +147,8 @@ export default function Navbar({ products }) {
             onClick={() => setMobileMenuOpen(false)}
           />
 
-          <div className="absolute right-1 top-15 h-[90%] rounded-2xl max-w-sm glass p-6 shadow-xl">
-            <div className="flex items-end  gap-5 mt-3 mr-2">
+          <div className="absolute right-1 top-15 h-[90%] rounded-2xl w-full max-w-sm glass p-6 shadow-xl">
+            <div className="flex items-end justify-between">
               {navItems.map((item) => {
                 const active = isActive(item);
                 return (
@@ -169,7 +167,7 @@ export default function Navbar({ products }) {
               })}
             </div>
             <div className="flex flex-col gap-3 mt-5">
-              <p className="text-center text-muted">Trend Brands</p>
+              <p className="text-center text-muted">Top Brands</p>
               {brands.map((brand) => (
                 <Link
                   key={brand.href}
