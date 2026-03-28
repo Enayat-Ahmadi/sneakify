@@ -63,7 +63,7 @@ export default function Navbar({ products }) {
       <nav className="border-b ">
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold">
+            <Link href="/" className="text-xl font-bold text-foreground icon-hover">
               SNEAK<span className="italic text-lime-400">ify</span>
             </Link>
           </div>
@@ -76,10 +76,10 @@ export default function Navbar({ products }) {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "relative text-sm font-medium transition",
+                    "relative text-sm font-medium",
                     active
                       ? "text-destructive font-semibold"
-                      : "text-gray-500 hover:text-black",
+                      : "text-foreground icon-hover",
                   )}
                 >
                   {item.label}
@@ -95,7 +95,7 @@ export default function Navbar({ products }) {
           </div>
 
           <div className="flex gap-6">
-            <Search onClick={() => setOpenSearch(true)} className="btn-hover" />
+            <Search onClick={() => setOpenSearch(true)} className="icon-hover" />
             {openSearch && (
               <div className="fixed mx-auto inset-0 z-100 p-4">
                 <div
@@ -110,7 +110,7 @@ export default function Navbar({ products }) {
             )}
             <div className="relative">
               <Link href="/wishlist">
-                <Heart className="w-7 h-7" />
+                <Heart className="w-7 h-7 icon-hover" />
                 <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs text-white">
                   {wishlist.length}
                 </span>
@@ -118,7 +118,7 @@ export default function Navbar({ products }) {
             </div>
             <div className="relative">
               <Link href="/cart">
-                <ShoppingCart className="w-7 h-7" />
+                <ShoppingCart className="w-7 h-7 icon-hover" />
                 <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs text-white">
                   {totalItems}
                 </span>
