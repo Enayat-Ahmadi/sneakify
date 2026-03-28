@@ -141,10 +141,13 @@ body {
   }
 }
 .btn-hover {
-  @apply  hover:scale-[1.02] transition duration-300 cursor-pointer;
+  @apply hover:scale-[1.02] transition duration-300 cursor-pointer;
 }
 .card-hover {
   @apply hover:shadow-md hover:scale-[1.01] transition;
+}
+.icon-hover {
+  @apply transition duration-300 hover:scale-[1.2];
 }
 .glass {
   @apply border-white/20 bg-primary/40  backdrop-blur-xl shadow-lg;

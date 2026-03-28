@@ -5,7 +5,9 @@ import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
 import { Heart } from "lucide-react";
 import SuccessMessage from "../ui/SuccessMessage";
-
+import { formatCurrency } from "@/lib/utils";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 import {
   Card,
   CardAction,
@@ -16,8 +18,18 @@ import {
 } from "@/components/ui/card";
 
 export default function ProductCard({ product }) {
+  const [sizeAlert, setSizeAlert] = useState(false);
   const { toggleWishlist, isWishlisted } = useWishlist();
-  const { addToCart, success } = useCart();
+  const { success } = useCart();
+  function handleAddToCart() {
+    if (!sizeAlert) {
+      setSizeAlert(true);
+      setTimeout(() => {
+        setSizeAlert(false);
+      }, 1500);
+      return;
+    }
+  }
 
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0 card-hover">
@@ -34,18 +46,21 @@ export default function ProductCard({ product }) {
           <Badge variant="secondary">{product.brand}</Badge>
         </CardAction>
         <CardTitle>{product.name}</CardTitle>
-        <CardDescription>{product.price} €</CardDescription>
+        <CardDescription>{formatCurrency(product.price)}</CardDescription>
       </CardHeader>
       <CardFooter className="flex gap-5 ">
         <Button
-          className="w-[80%] h-9 rounded-2xl btn-hover"
-          size=""
+          className={cn(
+            "w-[80%] h-9 rounded-2xl btn-hover",
+            sizeAlert && "text-red-500",
+          )}
+          disabled={product.stock === 0}
           onClick={(e) => {
             e.preventDefault();
-            addToCart(product._id);
+            handleAddToCart();
           }}
         >
-          Add to Cart
+          {sizeAlert ? "Please select size" : "Add to Cart"}
         </Button>
         <button
           className="hover:cursor-pointer"

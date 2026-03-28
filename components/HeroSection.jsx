@@ -16,8 +16,8 @@ export default function HeroSection() {
 
       <div className="relative mx-auto flex min-h-[80vh] max-w-7xl items-center px-4 py-20 md:px-8">
         <div className="max-w-2xl text-white">
-          <div className="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm backdrop-blur">
-            <span className="font-semibold">
+          <div className="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm backdrop-blur icon-hover">
+            <span className="font-semibold icon-hover">
               Sneak<span className="italic text-lime-400">ify</span>
             </span>
           </div>
@@ -36,7 +36,7 @@ export default function HeroSection() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="/products"
-              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200"
+              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-neutral-200 icon-hover"
             >
               Shop Now
             </Link>

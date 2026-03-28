@@ -4,8 +4,7 @@ import { useRouter } from "next/router";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchOverly from "../SearchOverly";
 
 const navItems = [
@@ -14,8 +13,21 @@ const navItems = [
   { label: "Women", href: "/products?gender=women", gender: "women" },
   { label: "Kids", href: "/products?gender=kids", gender: "kids" },
 ];
+const brands = [
+  { label: "Nike", src: "/brands/nike.png", href: "/products?search=nike" },
+  {
+    label: "Adidas",
+    src: "/brands/adidas.png",
+    href: "/products?search=adidas",
+  },
+  {
+    label: "New balance",
+    src: "/brands/newbalance.png",
+    href: "/products?search=new balance",
+  },
+];
 export default function Navbar({ products }) {
-  const [open, setOpen] = useState(false);
+  const [openSearch, setOpenSearch] = useState(false);
   const router = useRouter();
   const { pathname, query } = router;
   const { wishlist } = useWishlist();
@@ -34,12 +46,24 @@ export default function Navbar({ products }) {
     return pathname === "/products" && query.gender === item.gender;
   }
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <>
       <nav className="border-b ">
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold">
+            <Link href="/" className="text-xl font-bold text-foreground icon-hover">
               SNEAK<span className="italic text-lime-400">ify</span>
             </Link>
           </div>
@@ -52,10 +76,10 @@ export default function Navbar({ products }) {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "relative text-sm font-medium transition",
+                    "relative text-sm font-medium",
                     active
                       ? "text-destructive font-semibold"
-                      : "text-gray-500 hover:text-black",
+                      : "text-foreground icon-hover",
                   )}
                 >
                   {item.label}
@@ -71,18 +95,22 @@ export default function Navbar({ products }) {
           </div>
 
           <div className="flex gap-6">
-            <Search onClick={() => setOpen(true)} className="btn-hover"/>
-            {open && (
+            <Search onClick={() => setOpenSearch(true)} className="icon-hover" />
+            {openSearch && (
               <div className="fixed mx-auto inset-0 z-100 p-4">
+                <div
+                  className="absolute inset-0 bg-black/50"
+                  onClick={() => setOpenSearch(false)}
+                />
                 <SearchOverly
                   products={products}
-                  onClose={() => setOpen(false)}
+                  onClose={() => setOpenSearch(false)}
                 />
               </div>
             )}
             <div className="relative">
               <Link href="/wishlist">
-                <Heart className="w-7 h-7" />
+                <Heart className="w-7 h-7 icon-hover" />
                 <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs text-white">
                   {wishlist.length}
                 </span>
@@ -90,15 +118,15 @@ export default function Navbar({ products }) {
             </div>
             <div className="relative">
               <Link href="/cart">
-                <ShoppingCart className="w-7 h-7" />
+                <ShoppingCart className="w-7 h-7 icon-hover" />
                 <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs text-white">
                   {totalItems}
                 </span>
               </Link>
             </div>
-            <Button
+            <button
               variant="ghost"
-              className="lg:hidden z-60 w-6 h-7"
+              className="lg:hidden z-50 w-6 h-7"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
             >
               {mobileMenuOpen ? (
@@ -106,20 +134,21 @@ export default function Navbar({ products }) {
               ) : (
                 <Menu className="w-6 h-6" />
               )}
-            </Button>
+            </button>
           </div>
         </div>
       </nav>
       {/* Mobile  Menu*/}
 
       {mobileMenuOpen && (
-        <div className="fixed w-full right-0 inset-0 z-30 lg:hidden">
+        <div className="fixed w-full right-0 inset-0 z-30 overflow-hidde lg:hidden">
           <div
             className="absolute inset-0 bg-black/50"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-white p-6 shadow-xl">
-            <div className="flex items-end flex-col gap-5 mt-10 mr-2">
+
+          <div className="absolute right-1 top-15 h-[90%] rounded-2xl w-full max-w-sm glass p-6 shadow-xl">
+            <div className="flex items-end justify-between">
               {navItems.map((item) => {
                 const active = isActive(item);
                 return (
@@ -128,16 +157,29 @@ export default function Navbar({ products }) {
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
-                      "relative text-sm font-medium transition",
-                      active
-                        ? "text-destructive font-semibold"
-                        : "text-gray-500 hover:text-black",
+                      "relative text-sm transition px-4 py-2 rounded-lg card-hover bg-card/30 font-semibold",
+                      active ? "text-destructive " : "text-muted",
                     )}
                   >
                     {item.label}
                   </Link>
                 );
               })}
+            </div>
+            <div className="flex flex-col gap-3 mt-5">
+              <p className="text-center text-muted">Top Brands</p>
+              {brands.map((brand) => (
+                <Link
+                  key={brand.href}
+                  href={brand.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="
+                    flex justify-between items-center p-4 h-14 text-sm font-semibold bg-card/30 text-muted transition overflow-hidde
+                    rounded-2xl card-hover"
+                >
+                  {brand.label}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@ import useSWR from "swr";
 import ErrorScreen from "@/components/ui/ErrorScreen";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import AdminOrderCard from "@/components/Admin/AdminOrderCard";
+import { formatCurrency } from "@/lib/utils";
 
 export default function Orders() {
   const { data, error, isLoading } = useSWR("/api/orders");
@@ -9,12 +10,20 @@ export default function Orders() {
   if (isLoading) return <LoadingScreen />;
 
   const orders = Array.isArray(data) ? data : [];
+  const totalRevenue = orders?.reduce(
+    (acc, amount) => acc + amount.totalAmount,
+    0,
+  );
   return (
     <main className="max-w-6xl min-h-screen flex flex-col mx-auto gap-3 bg-background px-4 py-8 md:px-8">
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-4">
         <div className="rounded-2xl border p-4 card-hover">
           <p className="text-sm text-muted-foreground">Total Orders</p>
           <p className="text-2xl font-bold">{orders.length}</p>
+        </div>
+        <div className="rounded-2xl border p-4 card-hover">
+          <p className="text-sm text-muted-foreground">Total Revenue </p>
+          <p className="text-2xl font-bold">{formatCurrency(totalRevenue)}</p>
         </div>
         <div className="rounded-2xl border p-4 card-hover">
           <p className="text-sm text-muted-foreground">Shipped Orders</p>
