@@ -2,10 +2,19 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { navItems, brands } from "./navItems";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function MobileMenu({ mobileMenuOpen, setMobileMenuOpen }) {
   const router = useRouter();
   const { pathname, query } = router;
+
+  useEffect(() => {
+    document.body.classList.toggle("overflow-hidden", mobileMenuOpen);
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [mobileMenuOpen]);
+
   function isActive(item) {
     if (item.href === "/") {
       return pathname === "/";
@@ -38,7 +47,7 @@ export default function MobileMenu({ mobileMenuOpen, setMobileMenuOpen }) {
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={cn(
-                  "relative text-sm transition px-4 py-2 rounded-lg card-hover bg-card/30 font-semibold",
+                  "relative text-sm transition px-4 py-2 rounded-2xl card-hover border shadow-xl font-semibold",
                   active ? "text-destructive " : "text-muted",
                 )}
               >
