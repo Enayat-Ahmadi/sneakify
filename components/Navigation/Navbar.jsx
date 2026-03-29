@@ -4,28 +4,11 @@ import { useRouter } from "next/router";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import SearchOverly from "../SearchOverly";
+import { navItems } from "./navItems";
+import MobileMenu from "./MobileMenu";
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Men", href: "/products?gender=men", gender: "men" },
-  { label: "Women", href: "/products?gender=women", gender: "women" },
-  { label: "Kids", href: "/products?gender=kids", gender: "kids" },
-];
-const brands = [
-  { label: "Nike", src: "/brands/nike.png", href: "/products?search=nike" },
-  {
-    label: "Adidas",
-    src: "/brands/adidas.png",
-    href: "/products?search=adidas",
-  },
-  {
-    label: "New balance",
-    src: "/brands/newbalance.png",
-    href: "/products?search=new balance",
-  },
-];
 export default function Navbar({ products }) {
   const [openSearch, setOpenSearch] = useState(false);
   const router = useRouter();
@@ -46,24 +29,15 @@ export default function Navbar({ products }) {
     return pathname === "/products" && query.gender === item.gender;
   }
 
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [mobileMenuOpen]);
-
   return (
     <>
       <nav className="border-b ">
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-foreground icon-hover">
+            <Link
+              href="/"
+              className="text-xl font-bold text-foreground icon-hover"
+            >
               SNEAK<span className="italic text-lime-400">ify</span>
             </Link>
           </div>
@@ -95,7 +69,10 @@ export default function Navbar({ products }) {
           </div>
 
           <div className="flex gap-6">
-            <Search onClick={() => setOpenSearch(true)} className="icon-hover" />
+            <Search
+              onClick={() => setOpenSearch(true)}
+              className="icon-hover"
+            />
             {openSearch && (
               <div className="fixed mx-auto inset-0 z-100 p-4">
                 <div
@@ -139,51 +116,10 @@ export default function Navbar({ products }) {
         </div>
       </nav>
       {/* Mobile  Menu*/}
-
-      {mobileMenuOpen && (
-        <div className="fixed w-full right-0 inset-0 z-30 overflow-hidde lg:hidden">
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-
-          <div className="absolute right-1 top-15 h-[90%] rounded-2xl w-full max-w-sm glass p-6 shadow-xl">
-            <div className="flex items-end justify-between">
-              {navItems.map((item) => {
-                const active = isActive(item);
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={cn(
-                      "relative text-sm transition px-4 py-2 rounded-lg card-hover bg-card/30 font-semibold",
-                      active ? "text-destructive " : "text-muted",
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </div>
-            <div className="flex flex-col gap-3 mt-5">
-              <p className="text-center text-muted">Top Brands</p>
-              {brands.map((brand) => (
-                <Link
-                  key={brand.href}
-                  href={brand.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="
-                    flex justify-between items-center p-4 h-14 text-sm font-semibold bg-card/30 text-muted transition overflow-hidde
-                    rounded-2xl card-hover"
-                >
-                  {brand.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      <MobileMenu
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+      />
     </>
   );
 }
