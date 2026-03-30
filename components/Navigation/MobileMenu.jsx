@@ -65,7 +65,7 @@ export default function MobileMenu({ mobileMenuOpen, setMobileMenuOpen }) {
               onClick={() => setMobileMenuOpen(false)}
               className="
                     flex justify-between items-center p-4 h-14 text-sm font-semibold bg-card/30 text-muted transition overflow-hidde
-                    rounded-2xl card-hover"
+                    rounded-2xl card-hover border"
             >
               {brand.label}
             </Link>
