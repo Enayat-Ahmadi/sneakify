@@ -15,7 +15,7 @@ export default function StatusScreen({
 
   return (
     <section
-      className={`relative overflow-hidden bg-white text-black ${
+      className={`relative overflow-hidden bg-white/20 text-black rounded-xl mt-4 ${
         fullScreen ? "min-h-screen" : "min-h-[60vh]"
       }`}
     >
