@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ShoppingCart, Heart, Menu, X, Search } from "lucide-react";
+import { ShoppingCart, Heart, Menu, X, Search, User2 } from "lucide-react";
 import { useRouter } from "next/router";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
@@ -99,6 +99,11 @@ export default function Navbar({ products }) {
                 <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs text-white">
                   {totalItems}
                 </span>
+              </Link>
+            </div>
+            <div className="relative">
+              <Link href="/login">
+                <User2 className="w-7 h-7 icon-hover" />
               </Link>
             </div>
             <button
