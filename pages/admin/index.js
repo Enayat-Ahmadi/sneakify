@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useSession, signIn } from "next-auth/react";
 
 const navItems = [
   { label: "Products", href: "/admin/products" },
@@ -6,6 +7,16 @@ const navItems = [
 ];
 
 export default function AdminPanel() {
+  const { data: session, status } = useSession();
+  if (status === "loading") return <p>loading...</p>;
+  if (!session) {
+    return (
+      <div>
+        <p>You must sign in.</p>
+        <button onClick={() => signIn("github")}>Login with GitHub</button>
+      </div>
+    );
+  }
   return (
     <main className="max-w-6xl min-h-screen mx-auto mt-2 overflow-hidden rounded-2xl border bg-card">
       <div className="flex gap-5 justify-around mt-5">
