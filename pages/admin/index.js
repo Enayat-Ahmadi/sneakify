@@ -11,10 +11,17 @@ export default function AdminPanel() {
   if (status === "loading") return <p>loading...</p>;
   if (!session) {
     return (
-      <div>
-        <p>You must sign in.</p>
-        <button onClick={() => signIn("github")}>Login with GitHub</button>
-      </div>
+      <main className="min-h-screen flex items-center justify-center px-6">
+        <div className="w-full max-w-md mx-auto rounded-2xl border p-8 text-center shadow-sm bg-white">
+          <p className="text-2xl font-bold mb-4">You must sign in.</p>
+          <Link
+            href="/login"
+            className="w-full flex items-center justify-center gap-3 rounded-xl bg-black text-white font-semibold py-3 hover:opacity-90 transition"
+          >
+            Login
+          </Link>
+        </div>
+      </main>
     );
   }
   return (
