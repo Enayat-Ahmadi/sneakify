@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { SWRConfig } from "swr";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import ErrorScreen from "@/components/ui/ErrorScreen";
+import { SessionProvider } from "next-auth/react";
 
 const fetcher = (url) =>
   fetch(url).then((res) => {
@@ -14,14 +15,16 @@ const fetcher = (url) =>
 
 export default function App({ Component, pageProps }) {
   return (
-    <SWRConfig
-      value={{
-        fetcher,
-        revalidateOnFocus: false,
-      }}
-    >
-      <Layout Component={Component} pageProps={pageProps} />
-    </SWRConfig>
+    <SessionProvider>
+      <SWRConfig
+        value={{
+          fetcher,
+          revalidateOnFocus: false,
+        }}
+      >
+        <Layout Component={Component} pageProps={pageProps} />
+      </SWRConfig>
+    </SessionProvider>
   );
 }
 
