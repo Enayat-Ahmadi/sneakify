@@ -7,6 +7,26 @@ export default function LoginPage() {
   if (status === "loading") {
     return <p>loading...</p>;
   }
+  if (session) {
+    return (
+      <main className="min-h-screen flex items-center justify-center px-6">
+        <div className="w-full max-w-md rounded-2xl border p-8 shadow-sm bg-white">
+          <h1 className="text-2xl font-bold mb-4">You are signed in</h1>
+          <p className="mb-2">Name: {session.user?.name}</p>
+          <p className="mb-2">Email: {session.user?.email}</p>
+          <p className="mb-6">Role: {session.user?.role}</p>
+          <Link href="/admin">Admin</Link>
+
+          <button
+            onClick={() => signOut({ callbackUrl: "/" })}
+            className="w-full rounded-xl bg-black text-white py-3 hover:opacity-90 transition"
+          >
+            Sign out
+          </button>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6 bg-neutral-50">
@@ -17,7 +37,7 @@ export default function LoginPage() {
         </p>
 
         <button
-          onClick={() => signIn("github", { callbackUrl: "/admin/products" })}
+          onClick={() => signIn("github")}
           className="w-full flex items-center justify-center gap-3 rounded-xl bg-black text-white py-3 hover:opacity-90 transition"
         >
           <Github className="w-5 h-5" />
