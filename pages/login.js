@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Github, Chrome } from "lucide-react";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
+import { isAdmin } from "@/lib/isAdmin";
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
@@ -15,12 +16,21 @@ export default function LoginPage() {
           <h1 className="text-2xl font-bold mb-4">You are signed in</h1>
           <p className="mb-2">Name: {session.user?.name}</p>
           <p className="mb-2">Email: {session.user?.email}</p>
-          <p className="mb-6">Role: {session.user?.role}</p>
-          <Link href="/admin">Admin</Link>
+          {session.user?.role === "admin" && (
+            <p className="mb-6">Role: {session.user?.role}</p>
+          )}
+          {session.user?.role === "admin" && (
+            <Link
+              href="/admin"
+              className="w-full rounded-xl bg-black text-white p-3 mt-3 hover:opacity-90 transition"
+            >
+              Admin Panel
+            </Link>
+          )}
 
           <button
             onClick={() => signOut({ callbackUrl: "/" })}
-            className="w-full rounded-xl bg-black text-white py-3 hover:opacity-90 transition"
+            className="w-full rounded-xl bg-black text-white py-3 mt-3 hover:opacity-90 transition"
           >
             Sign out
           </button>
